@@ -8,7 +8,7 @@ const MobilePreview = () => {
         height: "380px",
         backgroundColor: "#f0f0f0",
         border: "12px solid black",
-        borderRadius: "10px",
+        borderRadius: "20px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
