@@ -65,7 +65,7 @@ const AppearanceTab = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        margin: "20px",
+        // margin: "20px",
         alignItems: "flex-start", // Updated alignment to "flex-start"
       }}
     >
