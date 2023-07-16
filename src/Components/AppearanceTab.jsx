@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { getUsername, updateUsername } from "../functions/dbUsernameFunctions";
+import TitleAndBioForm from "./TitleAndBioForm";
+import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -59,16 +61,25 @@ const AppearanceTab = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", margin: "20px" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        margin: "20px",
+        alignItems: "flex-start", // Updated alignment to "flex-start"
+      }}
+    >
+      <Box
+        sx={{ display: "flex", alignItems: "flex-start", marginBottom: "20px" }}
+      >
         <Avatar
-          style={{ width: "100px", height: "100px", margin: "10px" }}
+          sx={{ width: "100px", height: "100px", margin: "10px" }}
           src={avatarImage}
           alt="Avatar"
         />
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <Box>
           <Button
-            style={{ textTransform: "none", height: "30px", margin: "10px" }}
+            sx={{ textTransform: "none", height: "30px", margin: "10px" }}
             variant="contained"
             color="primary"
             component="label"
@@ -83,10 +94,12 @@ const AppearanceTab = () => {
               onChange={handleUploadClick}
             />
           </Button>
-        </div>
-      </div>
-      <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
-        <FormControl style={{ margin: "10px" }}>
+        </Box>
+      </Box>
+      <Box
+        sx={{ display: "flex", alignItems: "flex-start", marginBottom: "20px" }}
+      >
+        <FormControl sx={{ margin: "10px" }}>
           <TextField
             id="username"
             label="Username"
@@ -95,20 +108,21 @@ const AppearanceTab = () => {
           />
         </FormControl>
         <Button
-          style={{ textTransform: "none", height: "30px", margin: "10px" }}
+          sx={{ textTransform: "none", height: "30px", margin: "10px" }}
           variant="contained"
           color="primary"
           onClick={handleUpdateClick}
         >
           Update
         </Button>
-      </div>
+      </Box>
       {error && (
-        <Typography color="error" variant="body1" style={{ marginTop: "10px" }}>
+        <Typography color="error" variant="body1" sx={{ marginBottom: "10px" }}>
           {error}
         </Typography>
       )}
-    </div>
+      <TitleAndBioForm />
+    </Box>
   );
 };
 
