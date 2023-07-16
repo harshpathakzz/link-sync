@@ -25,7 +25,7 @@ const TitleAndBioForm = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", margin: "20px" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", margin: "0" }}>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
         <FormControl sx={{ margin: "10px" }}>
           <TextField

@@ -70,7 +70,11 @@ const AppearanceTab = () => {
       }}
     >
       <Box
-        sx={{ display: "flex", alignItems: "flex-start", marginBottom: "20px" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
       >
         <Avatar
           sx={{ width: "100px", height: "100px", margin: "10px" }}
@@ -97,9 +101,14 @@ const AppearanceTab = () => {
         </Box>
       </Box>
       <Box
-        sx={{ display: "flex", alignItems: "flex-start", marginBottom: "20px" }}
+        sx={{
+          display: "flex",
+          alignItems: "flex-start",
+          marginBottom: "20px",
+          flexDirection: "column",
+        }}
       >
-        <FormControl sx={{ margin: "10px" }}>
+        <FormControl sx={{ margin: "10px", width: "100%" }}>
           <TextField
             id="username"
             label="Username"
@@ -108,7 +117,13 @@ const AppearanceTab = () => {
           />
         </FormControl>
         <Button
-          sx={{ textTransform: "none", height: "30px", margin: "10px" }}
+          sx={{
+            textTransform: "none",
+            height: "30px",
+            marginLeft: "10px",
+            marginTop: "5px",
+            width: "100%",
+          }}
           variant="contained"
           color="primary"
           onClick={handleUpdateClick}
