@@ -7,6 +7,9 @@ import {
   deleteDoc,
   updateDoc,
   writeBatch,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 
 // Add a new link
@@ -56,4 +59,21 @@ export const updateLink = async (id, title, url) => {
   });
 
   await batch.commit();
+};
+
+// Function to get all links for a specific user by their userId
+export const getLinksByUserId = async (userId) => {
+  try {
+    const linksRef = collection(db, "links");
+    const querySnapshot = await getDocs(
+      query(linksRef, where("userId", "==", userId))
+    );
+
+    const links = querySnapshot.docs.map((doc) => doc.data());
+
+    return links;
+  } catch (error) {
+    console.error("Error getting links by userId:", error);
+    throw error;
+  }
 };
