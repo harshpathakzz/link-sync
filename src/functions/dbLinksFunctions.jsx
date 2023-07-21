@@ -21,9 +21,16 @@ export const createLink = async (userId, title, url) => {
     title,
     url,
     visibility: true,
+    // Add the linkId field to the link data model
+    linkId: "", // We'll fill this field with the document ID once it's created
   };
 
   const docRef = await addDoc(linksRef, newLink);
+
+  // Update the linkId field with the document ID
+  await updateDoc(docRef, {
+    linkId: docRef.id,
+  });
 
   return docRef.id;
 };
