@@ -1,16 +1,25 @@
+// LinkForm.jsx
 import { useState } from "react";
+import { createLink } from "../functions/dbLinksFunctions";
+import { useUserAuth } from "../context/UserAuthContext";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const LinkForm = ({ onSubmit }) => {
+const LinkForm = ({ onClose }) => {
+  const { user } = useUserAuth();
   const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
+  const [url, setUrl] = useState("");
 
-  const handleSubmit = () => {
-    onSubmit({
-      title,
-      link,
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Assuming you have 'userId', 'title', and 'url' variables set
+      const linkId = await createLink(user.uid, title, url);
+      console.log("New link added with LinkId:", linkId);
+      onClose(); // Call the callback to close the form
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -23,8 +32,8 @@ const LinkForm = ({ onSubmit }) => {
 
       <TextField
         label="Link"
-        value={link}
-        onChange={(e) => setLink(e.target.value)}
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
       />
 
       <Button type="submit">Submit</Button>
