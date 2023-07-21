@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Grid, Tab, Tabs } from "@mui/material";
 import Header from "../Components/Header";
+import AppearanceTab from "../Components/AppearanceTab";
 import MobilePreview from "../Components/MobilePreview";
 
 const AdminPage = () => {
@@ -34,12 +35,7 @@ const AdminPage = () => {
                 </ul>
               </div>
             )}
-            {activeTab === 1 && (
-              <div>
-                <h2>Tab 2 Content</h2>
-                {/* Additional content for the "Appearance" tab */}
-              </div>
-            )}
+            {activeTab === 1 && <AppearanceTab />}
           </div>
         </Grid>
         <Grid item xs={12} md={3}>
