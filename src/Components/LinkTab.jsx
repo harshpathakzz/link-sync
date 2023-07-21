@@ -1,3 +1,4 @@
+// LinkTab.jsx
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import LinkForm from "./LinkForm";
@@ -9,8 +10,7 @@ const LinkTab = () => {
     setShowForm(true);
   };
 
-  const handleSubmitLink = () => {
-    // submit link
+  const handleFormClose = () => {
     setShowForm(false);
   };
 
@@ -18,7 +18,7 @@ const LinkTab = () => {
     <div>
       <Button onClick={handleAddLink}>Add Link</Button>
 
-      {showForm && <LinkForm onSubmit={handleSubmitLink} />}
+      {showForm && <LinkForm onClose={handleFormClose} />}
     </div>
   );
 };
