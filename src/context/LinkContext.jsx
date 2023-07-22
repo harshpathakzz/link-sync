@@ -6,6 +6,7 @@ import {
   deleteLink,
   updateLink,
   getLinksByUserId,
+  changeLinkVisibility,
 } from "../functions/dbLinksFunctions";
 
 const LinkContext = createContext();
@@ -29,14 +30,15 @@ export const LinkProvider = ({ children }) => {
     } else {
       setLinks([]); // Clear the links if the user is not authenticated
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const handleCreateNewLink = async (title, url) => {
     try {
       const linkId = await createLink(user.uid, title, url);
-      setLinks((prevLinks) => [...prevLinks, { linkId, title, url }]);
+      setLinks((prevLinks) => [
+        ...prevLinks,
+        { linkId, title, url, visibility: true },
+      ]);
     } catch (error) {
       console.error("Error creating link:", error);
     }
@@ -68,6 +70,19 @@ export const LinkProvider = ({ children }) => {
     }
   };
 
+  const handleVisibilityChange = async (linkId, visibility) => {
+    try {
+      await changeLinkVisibility(linkId, visibility);
+      setLinks((prevLinks) =>
+        prevLinks.map((link) =>
+          link.linkId === linkId ? { ...link, visibility } : link
+        )
+      );
+    } catch (error) {
+      console.error("Error changing link visibility:", error);
+    }
+  };
+
   return (
     <LinkContext.Provider
       value={{
@@ -75,6 +90,7 @@ export const LinkProvider = ({ children }) => {
         handleCreateNewLink,
         handleUpdateExistingLink,
         handleDeleteExistingLink,
+        handleVisibilityChange,
       }}
     >
       {children}
