@@ -1,22 +1,34 @@
-// LinkForm.jsx
 import { useState } from "react";
-import { createLink } from "../functions/dbLinksFunctions";
-import { useUserAuth } from "../context/UserAuthContext";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { useLinkContext } from "../context/LinkContext";
 
 const LinkForm = ({ onClose }) => {
-  const { user } = useUserAuth();
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+  const { handleCreateNewLink } = useLinkContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!title || !url) {
+      setError("Please fill in both the title and URL fields.");
+      return;
+    }
+
+    // Regular expression to check if the URL is valid
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    if (!url.match(urlRegex)) {
+      setError("Please enter a valid URL.");
+      return;
+    }
+
     try {
-      // Assuming you have 'userId', 'title', and 'url' variables set
-      const linkId = await createLink(user.uid, title, url);
+      const linkId = await handleCreateNewLink(title, url);
       console.log("New link added with LinkId:", linkId);
-      onClose(); // Call the callback to close the form
+      onClose();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -36,7 +48,16 @@ const LinkForm = ({ onClose }) => {
         onChange={(e) => setUrl(e.target.value)}
       />
 
-      <Button type="submit">Submit</Button>
+      <Box>
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
+      </Box>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 };
