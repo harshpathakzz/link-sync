@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Grid, Tab, Tabs } from "@mui/material";
 import Header from "../Components/Header";
 import AppearanceTab from "../Components/AppearanceTab";
+import LinkTab from "../Components/LinkTab";
 import MobilePreview from "../Components/MobilePreview";
 
 const AdminPage = () => {
@@ -26,15 +27,7 @@ const AdminPage = () => {
               <Tab label="Links" />
               <Tab label="Appearance" />
             </Tabs>
-            {activeTab === 0 && (
-              <div>
-                <h2>Tab 1 Content</h2>
-                <ul>
-                  <li>Link 1</li>
-                  <li>Link 2</li>
-                </ul>
-              </div>
-            )}
+            {activeTab === 0 && <LinkTab />}
             {activeTab === 1 && <AppearanceTab />}
           </div>
         </Grid>

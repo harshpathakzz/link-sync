@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { getUsername, updateUsername } from "../functions/dbUsernameFunctions";
 import TitleAndBioForm from "./TitleAndBioForm";
