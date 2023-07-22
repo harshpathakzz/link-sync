@@ -84,3 +84,14 @@ export const getLinksByUserId = async (userId) => {
     throw error;
   }
 };
+
+// Function to change the visibility of a link
+export const changeLinkVisibility = async (linkId, visibility) => {
+  try {
+    const linkDocRef = doc(db, "links", linkId);
+    await updateDoc(linkDocRef, { visibility });
+  } catch (error) {
+    console.error("Error changing link visibility:", error);
+    throw error;
+  }
+};
