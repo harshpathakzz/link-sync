@@ -7,7 +7,9 @@ export const addUserToCollection = async (user) => {
     const userRef = doc(usersCollectionRef, user.uid);
     const userObj = {
       email: user.email,
-      username: user.uid, // Set uid as the username
+      username: user.uid,
+      title: "@title",
+      bio: "@bio",
     };
 
     await setDoc(userRef, userObj);
