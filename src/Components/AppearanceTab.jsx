@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
-import { getUsername, updateUsername } from "../functions/dbUsernameFunctions";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 import TitleAndBioForm from "./TitleAndBioForm";
 import Box from "@mui/material/Box";
@@ -9,28 +8,12 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
 const AppearanceTab = () => {
   const { user } = useUserAuth();
-  const { handleUploadImage } = useTitleAndBioContext();
+  const { handleUploadImage, username, setUsername, handleUpdateUsername } =
+    useTitleAndBioContext();
   const [avatarImage, setAvatarImage] = useState(null);
-  const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const fetchedUsername = await getUsername(user.uid);
-        setUsername(fetchedUsername);
-        console.log("Username:", fetchedUsername);
-      } catch (error) {
-        console.error("Error fetching username:", error);
-        setError("Failed to fetch username. Please try again.");
-      }
-    };
-
-    fetchUsername();
-  }, [user.uid]);
 
   const handleUploadClick = (event) => {
     handleUploadImage(event.target.files[0]);
@@ -38,17 +21,13 @@ const AppearanceTab = () => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
-    setError(null); // Clear any previous error when the input value changes
+    setError(null);
   };
 
   const handleUpdateClick = async () => {
     try {
-      const success = await updateUsername(user.uid, username);
-      if (success) {
-        console.log("Username updated:", username);
-      } else {
-        throw new Error("Failed to update username. Please try again.");
-      }
+      await handleUpdateUsername(username);
+      console.log("Username updated:", username);
     } catch (error) {
       console.error("Error updating username:", error);
       let errorMessage = "Failed to update username. Please try again.";
@@ -68,7 +47,7 @@ const AppearanceTab = () => {
         display: "flex",
         flexDirection: "column",
         margin: "20px",
-        alignItems: "flex-start", // Updated alignment to "flex-start"
+        alignItems: "flex-start",
       }}
     >
       <Box

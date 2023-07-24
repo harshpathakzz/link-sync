@@ -9,6 +9,10 @@ import {
   uploadImage,
   getProfilePicUrl,
 } from "../functions/dbImageFunctions";
+import {
+  getUsername as dbGetUsername,
+  updateUsername as dbUpdateUsername,
+} from "../functions/dbUsernameFunctions";
 
 const TitleAndBioContext = createContext();
 
@@ -17,6 +21,7 @@ export const TitleAndBioProvider = ({ children }) => {
   const [profilePicURL, setProfilePicURL] = useState("");
   const [title, setTitle] = useState("");
   const [bio, setBio] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +33,11 @@ export const TitleAndBioProvider = ({ children }) => {
 
           const profilePicUrl = await getProfilePicUrl(user.uid);
           setProfilePicURL(profilePicUrl);
+
+          // Fetch username and set it to the state
+          const fetchedUsername = await dbGetUsername(user.uid);
+          setUsername(fetchedUsername);
+          console.log("Username:", fetchedUsername);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,6 +74,18 @@ export const TitleAndBioProvider = ({ children }) => {
     }
   };
 
+  const handleUpdateUsername = async (newUsername) => {
+    try {
+      if (user) {
+        await dbUpdateUsername(user.uid, newUsername);
+        setUsername(newUsername);
+        console.log("Username updated successfully.");
+      }
+    } catch (error) {
+      console.error("Error updating username:", error);
+    }
+  };
+
   return (
     <TitleAndBioContext.Provider
       value={{
@@ -73,8 +95,11 @@ export const TitleAndBioProvider = ({ children }) => {
         setTitle,
         bio,
         setBio,
+        username,
+        setUsername,
         handleUpdateTitleAndBio,
         handleUploadImage,
+        handleUpdateUsername,
       }}
     >
       {children}
