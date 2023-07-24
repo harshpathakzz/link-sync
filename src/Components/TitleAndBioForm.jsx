@@ -10,7 +10,6 @@ const TitleAndBioForm = () => {
     useTitleAndBioContext();
 
   const handleUpdateClick = () => {
-    // Call the function from the context to update the title and bio in the database
     handleUpdateTitleAndBio(title, bio);
   };
 
@@ -22,12 +21,21 @@ const TitleAndBioForm = () => {
             id="title"
             label="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)} // Use the setter from the context
+            onChange={(e) => setTitle(e.target.value)}
             inputProps={{
-              maxLength: 10, // Maximum 10 characters for title
+              maxLength: 10,
             }}
           />
-          <Typography variant="body2" color="textSecondary">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            sx={{
+              position: "absolute",
+              bottom: "0",
+              right: "10px",
+              fontSize: "12px",
+            }}
+          >
             {`${title.length}/10`}
           </Typography>
         </FormControl>
@@ -40,12 +48,21 @@ const TitleAndBioForm = () => {
             multiline
             rows={4}
             value={bio}
-            onChange={(e) => setBio(e.target.value)} // Use the setter from the context
+            onChange={(e) => setBio(e.target.value)}
             inputProps={{
-              maxLength: 50, // Maximum 50 characters for bio
+              maxLength: 50,
             }}
           />
-          <Typography variant="body2" color="textSecondary">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            sx={{
+              position: "absolute",
+              bottom: "0",
+              right: "10px",
+              fontSize: "12px",
+            }}
+          >
             {`${bio.length}/50`}
           </Typography>
         </FormControl>
