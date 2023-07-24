@@ -1,6 +1,4 @@
-import React from "react";
 import { useState } from "react";
-import { useUserAuth } from "../context/UserAuthContext";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 import TitleAndBioForm from "./TitleAndBioForm";
 import Box from "@mui/material/Box";
@@ -11,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 const AppearanceTab = () => {
-  const { user } = useUserAuth();
   const {
     handleUploadImage,
     username,
