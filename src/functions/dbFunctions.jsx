@@ -8,6 +8,7 @@ export const addUserToCollection = async (user) => {
     const userObj = {
       email: user.email,
       username: user.uid,
+      profilePicUrl: "",
       title: "@title",
       bio: "@bio",
     };
