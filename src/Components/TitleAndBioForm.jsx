@@ -1,27 +1,16 @@
-import { useState } from "react";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 
 const TitleAndBioForm = () => {
-  const [title, setTitle] = useState("");
-  const [bio, setBio] = useState("");
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
-  };
+  const { title, setTitle, bio, setBio, handleUpdateTitleAndBio } =
+    useTitleAndBioContext();
 
   const handleUpdateClick = () => {
-    // Implement your update logic here
-    console.log("Title:", title);
-    console.log("Bio:", bio);
-    // Call the necessary functions to update the title and bio in the database
-    // For example: updateTitleAndBio(user.uid, title, bio);
+    handleUpdateTitleAndBio(title, bio);
   };
 
   return (
@@ -32,8 +21,23 @@ const TitleAndBioForm = () => {
             id="title"
             label="Title"
             value={title}
-            onChange={handleTitleChange}
+            onChange={(e) => setTitle(e.target.value)}
+            inputProps={{
+              maxLength: 10,
+            }}
           />
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            sx={{
+              position: "absolute",
+              bottom: "0",
+              right: "10px",
+              fontSize: "12px",
+            }}
+          >
+            {`${title.length}/10`}
+          </Typography>
         </FormControl>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
@@ -44,8 +48,23 @@ const TitleAndBioForm = () => {
             multiline
             rows={4}
             value={bio}
-            onChange={handleBioChange}
+            onChange={(e) => setBio(e.target.value)}
+            inputProps={{
+              maxLength: 50,
+            }}
           />
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            sx={{
+              position: "absolute",
+              bottom: "0",
+              right: "10px",
+              fontSize: "12px",
+            }}
+          >
+            {`${bio.length}/50`}
+          </Typography>
         </FormControl>
       </Box>
       <Button
