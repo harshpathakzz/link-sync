@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { getUsername, updateUsername } from "../functions/dbUsernameFunctions";
+import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 import TitleAndBioForm from "./TitleAndBioForm";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -11,6 +12,7 @@ import Typography from "@mui/material/Typography";
 
 const AppearanceTab = () => {
   const { user } = useUserAuth();
+  const { handleUploadImage } = useTitleAndBioContext();
   const [avatarImage, setAvatarImage] = useState(null);
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
@@ -31,7 +33,7 @@ const AppearanceTab = () => {
   }, [user.uid]);
 
   const handleUploadClick = (event) => {
-    // Logic to handle photo upload
+    handleUploadImage(event.target.files[0]);
   };
 
   const handleUsernameChange = (event) => {
