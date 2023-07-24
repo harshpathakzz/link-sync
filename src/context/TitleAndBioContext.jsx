@@ -4,6 +4,11 @@ import {
   getUserTitleAndBio,
   updateUserTitleAndBio,
 } from "../functions/dbTitleBioFunctions";
+import {
+  updateProfilePicUrl,
+  uploadImage,
+  getProfilePicUrl,
+} from "../functions/dbImageFunctions";
 
 const TitleAndBioContext = createContext();
 
@@ -14,24 +19,22 @@ export const TitleAndBioProvider = ({ children }) => {
   const [bio, setBio] = useState("");
 
   useEffect(() => {
-    const fetchTitleAndBio = async () => {
+    const fetchData = async () => {
       try {
         if (user) {
           const { title, bio } = await getUserTitleAndBio(user.uid);
           setTitle(title);
           setBio(bio);
+
+          const profilePicUrl = await getProfilePicUrl(user.uid);
+          setProfilePicURL(profilePicUrl);
         }
       } catch (error) {
-        console.error("Error getting title and bio:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    if (user) {
-      fetchTitleAndBio();
-    } else {
-      setTitle("");
-      setBio("");
-    }
+    fetchData();
   }, [user]);
 
   const handleUpdateTitleAndBio = async (newTitle, newBio) => {
@@ -47,6 +50,20 @@ export const TitleAndBioProvider = ({ children }) => {
     }
   };
 
+  const handleUploadImage = async (file) => {
+    try {
+      const downloadURL = await uploadImage(file);
+
+      if (downloadURL) {
+        await updateProfilePicUrl(user.uid, downloadURL);
+        setProfilePicURL(downloadURL);
+        console.log("Image uploaded successfully.");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+
   return (
     <TitleAndBioContext.Provider
       value={{
@@ -57,6 +74,7 @@ export const TitleAndBioProvider = ({ children }) => {
         bio,
         setBio,
         handleUpdateTitleAndBio,
+        handleUploadImage,
       }}
     >
       {children}
