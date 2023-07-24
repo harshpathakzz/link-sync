@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
@@ -8,11 +9,16 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+
 const AppearanceTab = () => {
   const { user } = useUserAuth();
-  const { handleUploadImage, username, setUsername, handleUpdateUsername } =
-    useTitleAndBioContext();
-  const [avatarImage, setAvatarImage] = useState(null);
+  const {
+    handleUploadImage,
+    username,
+    setUsername,
+    handleUpdateUsername,
+    profilePicURL,
+  } = useTitleAndBioContext();
   const [error, setError] = useState(null);
 
   const handleUploadClick = (event) => {
@@ -57,11 +63,18 @@ const AppearanceTab = () => {
           marginBottom: "20px",
         }}
       >
-        <Avatar
-          sx={{ width: "100px", height: "100px", margin: "10px" }}
-          src={avatarImage}
-          alt="Avatar"
-        />
+        {profilePicURL ? (
+          <Avatar
+            sx={{ width: "100px", height: "100px", margin: "10px" }}
+            src={profilePicURL}
+            alt="Avatar"
+          />
+        ) : (
+          <Avatar
+            sx={{ width: "100px", height: "100px", margin: "10px" }}
+            alt="Default Avatar"
+          />
+        )}
         <Box>
           <Button
             sx={{ textTransform: "none", height: "30px", margin: "10px" }}
