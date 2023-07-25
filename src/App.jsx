@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
-import HomePage from "./Pages/HomePage";
+import LandingPage from "./Pages/LandingPage";
 import AdminPage from "./Pages/AdminPage";
 import UserPage from "./Pages/UserPage";
 import { useUserAuth } from "./context/UserAuthContext";
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LandingPage />} />
 
         <Route
           path="/admin"
