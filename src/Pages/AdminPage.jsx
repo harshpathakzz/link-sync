@@ -13,7 +13,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Header />
       <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
@@ -31,7 +31,18 @@ const AdminPage = () => {
             {activeTab === 1 && <AppearanceTab />}
           </div>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid
+          item
+          xs={12}
+          md={3}
+          sx={{
+            position: "sticky",
+            top: 0,
+            right: 0,
+            maxHeight: "100vh",
+            overflow: "auto",
+          }}
+        >
           {/* Right Part */}
           <MobilePreview />
         </Grid>
