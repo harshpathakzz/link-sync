@@ -16,8 +16,7 @@ const MobilePreview = () => {
         fontSize: "18px",
         fontWeight: "bold",
         color: "#555",
-        position: "sticky",
-        top: "40px",
+        margin: "40px auto",
       }}
     >
       MobilePreview
