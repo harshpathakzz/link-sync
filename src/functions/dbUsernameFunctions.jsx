@@ -51,6 +51,25 @@ export const updateUsername = async (userId, newUsername) => {
     return true;
   } catch (error) {
     console.error("Error updating username:", error);
-    throw error; // Re-throw the error to handle it in the calling function
+    throw error;
+  }
+};
+
+export const getIdByUsername = async (username) => {
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.id;
+    } else {
+      console.log("User not found.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error getting userId by username:", error);
+    return null;
   }
 };
