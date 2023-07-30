@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import { Typography, Box, Container, Stack } from "@mui/material";
 
 const pageStyles = {
+  glassMorphism: true,
+
   boxContainer: {
     justifyContent: "center",
     minHeight: "100vh",
@@ -17,17 +19,22 @@ const pageStyles = {
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
   },
-  container: {
+  container: (glassMorphism) => ({
     maxWidth: "md",
     textAlign: "center",
     height: "100vh",
     width: "100%",
-    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-    backdropFilter: "blur(15px)",
-    borderRadius: "1px solid rgba( 255, 255, 255, 0.18 )",
-    padding: "20px",
     color: "#fff",
-  },
+    padding: "20px",
+    // Set the glass morphism styles conditionally
+    boxShadow: glassMorphism
+      ? "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )"
+      : "none",
+    backdropFilter: glassMorphism ? "blur(15px)" : "none",
+    borderRadius: glassMorphism
+      ? "1px solid rgba( 255, 255, 255, 0.18 )"
+      : "none",
+  }),
   button: {
     width: "85%",
     background: "rgba( 14, 8, 8, 0.8)",
@@ -62,7 +69,10 @@ const ProfilePage = () => {
 
   return (
     <Box sx={pageStyles.boxContainer}>
-      <Container maxWidth="md" style={pageStyles.container}>
+      <Container
+        maxWidth="md"
+        style={pageStyles.container(pageStyles.glassMorphism)} // Apply the glassMorphism styles here
+      >
         <UserProfileAvatar userId={userId} />
         <Typography variant="h4" gutterBottom>
           {title}
