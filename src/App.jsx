@@ -7,11 +7,12 @@ import UserPage from "./Pages/UserPage";
 import { useUserAuth } from "./context/UserAuthContext";
 import Protected from "./Components/Protected";
 import RequestLoginPage from "./Pages/RequestLoginPage";
-
+import { Analytics } from "@vercel/analytics/react";
 function App() {
   const { isLoggedIn } = useUserAuth();
   return (
     <>
+      <Analytics />
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
