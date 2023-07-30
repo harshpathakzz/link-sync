@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import { getProfilePicUrl } from "../functions/dbImageFunctions";
 
 const UserProfileAvatar = ({ userId }) => {
@@ -14,11 +14,13 @@ const UserProfileAvatar = ({ userId }) => {
   }, [userId]);
 
   return (
-    <Avatar
-      alt="User Profile Picture"
-      src={profilePicUrl}
-      sx={{ width: 80, height: 80 }}
-    />
+    <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 2 }}>
+      <Avatar
+        alt="User Profile Picture"
+        src={profilePicUrl}
+        sx={{ width: 80, height: 80 }}
+      />
+    </Box>
   );
 };
 
