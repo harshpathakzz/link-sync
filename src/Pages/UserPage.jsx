@@ -7,6 +7,39 @@ import UserProfileAvatar from "../Components/UserProfileAvatar";
 import Button from "@mui/material/Button";
 import { Typography, Box, Container, Stack } from "@mui/material";
 
+const pageStyles = {
+  boxContainer: {
+    justifyContent: "center",
+    minHeight: "100vh",
+    backgroundImage:
+      "url('https://firebasestorage.googleapis.com/v0/b/link-sync-64286.appspot.com/o/images%2Fpexels-pixabay-36717.jpg?alt=media&token=56b86be4-efbc-407a-a358-97b3008ab8d0')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+  },
+  container: {
+    maxWidth: "md",
+    textAlign: "center",
+    height: "100vh",
+    width: "100%",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur(15px)",
+    borderRadius: "1px solid rgba( 255, 255, 255, 0.18 )",
+    padding: "20px",
+    color: "#fff",
+  },
+  button: {
+    width: "85%",
+    background: "rgba( 14, 8, 8, 0.8)",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur(14px)",
+    borderRadius: "40px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
+    padding: "10px",
+    color: "#fff",
+  },
+};
+
 const ProfilePage = () => {
   const { username } = useParams();
   const [userId, setUserId] = useState(null);
@@ -28,8 +61,8 @@ const ProfilePage = () => {
   }, [username]);
 
   return (
-    <Container maxWidth="md">
-      <Box mt={4} textAlign="center">
+    <Box sx={pageStyles.boxContainer}>
+      <Container maxWidth="md" style={pageStyles.container}>
         <UserProfileAvatar userId={userId} />
         <Typography variant="h4" gutterBottom>
           {title}
@@ -37,27 +70,28 @@ const ProfilePage = () => {
         <Typography variant="body1" gutterBottom>
           {bio}
         </Typography>
-      </Box>
-      <Box mt={4} textAlign="center">
-        <Stack spacing={2}>
-          {links.map((link) =>
-            link.visibility ? (
-              <Button
-                key={link.id}
-                variant="contained"
-                color="primary"
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                fullWidth
-              >
-                {link.title}
-              </Button>
-            ) : null
-          )}
-        </Stack>
-      </Box>
-    </Container>
+        <Box mt={4} textAlign="center">
+          <Stack spacing={2} sx={{ alignItems: "center" }}>
+            {links.map(
+              (link) =>
+                link.visibility && (
+                  <Button
+                    key={link.id}
+                    variant="contained"
+                    color="primary"
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={pageStyles.button}
+                  >
+                    {link.title}
+                  </Button>
+                )
+            )}
+          </Stack>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
