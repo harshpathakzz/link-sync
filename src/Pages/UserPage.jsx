@@ -44,6 +44,9 @@ const pageStyles = {
     border: "1px solid rgba( 255, 255, 255, 0.18 )",
     padding: "10px",
     color: "#fff",
+    "&:hover": {
+      background: "rgba( 14, 8, 8, 0.8)",
+    },
   },
 };
 
