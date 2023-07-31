@@ -60,36 +60,27 @@ const AppearanceTab = () => {
           marginBottom: 2,
         }}
       >
-        {profilePicURL ? (
-          <Avatar
-            sx={{ width: "100px", height: "100px", margin: "10px" }}
-            src={profilePicURL}
-            alt="Avatar"
+        <Avatar
+          sx={{ width: "100px", height: "100px", margin: "10px" }}
+          src={profilePicURL || ""}
+          alt="Avatar"
+        />
+        <Button
+          sx={{ textTransform: "none", height: "30px", margin: "10px" }}
+          variant="contained"
+          color="primary"
+          component="label"
+          htmlFor="avatar-upload"
+        >
+          Upload Photo
+          <input
+            id="avatar-upload"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleUploadClick}
           />
-        ) : (
-          <Avatar
-            sx={{ width: "100px", height: "100px", margin: "10px" }}
-            alt="Default Avatar"
-          />
-        )}
-        <Box>
-          <Button
-            sx={{ textTransform: "none", height: "30px", margin: "10px" }}
-            variant="contained"
-            color="primary"
-            component="label"
-            htmlFor="avatar-upload"
-          >
-            Upload Photo
-            <input
-              id="avatar-upload"
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handleUploadClick}
-            />
-          </Button>
-        </Box>
+        </Button>
       </Box>
       <Box
         sx={{
