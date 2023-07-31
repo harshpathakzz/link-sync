@@ -2,6 +2,9 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Input from "@mui/material/Input";
 import { useLinkContext } from "../context/LinkContext";
 
 const LinkForm = ({ onClose }) => {
@@ -36,20 +39,35 @@ const LinkForm = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
-        label="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <FormControl
+        sx={{ marginBottom: 2, marginLeft: 2, marginRight: 2, width: "90%" }}
+      >
+        <InputLabel htmlFor="title-input">Title</InputLabel>
+        <Input
+          id="title-input"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </FormControl>
 
-      <TextField
-        label="Link"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
+      <FormControl
+        fullWidth
+        sx={{ marginBottom: 2, marginLeft: 2, width: "90%" }}
+      >
+        <InputLabel htmlFor="link-input">Link</InputLabel>
+        <Input
+          id="link-input"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+      </FormControl>
 
       <Box>
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ marginRight: 2, marginLeft: 2 }}
+        >
           Submit
         </Button>
         <Button variant="outlined" onClick={onClose}>

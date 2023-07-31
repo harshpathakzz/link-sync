@@ -15,58 +15,54 @@ const TitleAndBioForm = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", margin: "0" }}>
-      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-        <FormControl sx={{ margin: "10px" }}>
-          <TextField
-            id="title"
-            label="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            inputProps={{
-              maxLength: 10,
-            }}
-          />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            sx={{
-              position: "absolute",
-              bottom: "0",
-              right: "10px",
-              fontSize: "12px",
-            }}
-          >
-            {`${title.length}/10`}
-          </Typography>
-        </FormControl>
-      </Box>
-      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-        <FormControl sx={{ margin: "10px" }}>
-          <TextField
-            id="bio"
-            label="Bio"
-            multiline
-            rows={4}
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            inputProps={{
-              maxLength: 50,
-            }}
-          />
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            sx={{
-              position: "absolute",
-              bottom: "0",
-              right: "10px",
-              fontSize: "12px",
-            }}
-          >
-            {`${bio.length}/50`}
-          </Typography>
-        </FormControl>
-      </Box>
+      <FormControl sx={{ margin: "10px" }}>
+        <TextField
+          id="title"
+          label="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          inputProps={{
+            maxLength: 10,
+          }}
+        />
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{
+            position: "absolute",
+            bottom: "0",
+            right: "10px",
+            fontSize: "12px",
+          }}
+        >
+          {`${title.length}/10`}
+        </Typography>
+      </FormControl>
+      <FormControl sx={{ margin: "10px" }}>
+        <TextField
+          id="bio"
+          label="Bio"
+          multiline
+          rows={4}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          inputProps={{
+            maxLength: 50,
+          }}
+        />
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{
+            position: "absolute",
+            bottom: "0",
+            right: "10px",
+            fontSize: "12px",
+          }}
+        >
+          {`${bio.length}/50`}
+        </Typography>
+      </FormControl>
       <Button
         sx={{ textTransform: "none", height: "30px", margin: "10px" }}
         variant="contained"

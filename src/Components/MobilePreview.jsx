@@ -1,25 +1,45 @@
-import Box from "@mui/material/Box";
+import { Box, Button } from "@mui/material";
+import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 
 const MobilePreview = () => {
+  const { username } = useTitleAndBioContext();
+
   return (
     <Box
       sx={{
-        width: "200px",
-        height: "380px",
-        backgroundColor: "#f0f0f0",
-        border: "12px solid black",
-        borderRadius: "20px",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
-        textAlign: "center",
-        fontSize: "18px",
-        fontWeight: "bold",
-        color: "#555",
-        margin: "40px auto",
       }}
     >
-      MobilePreview
+      <Box
+        sx={{
+          width: "200px",
+          height: "380px",
+          backgroundColor: "#f0f0f0",
+          border: "12px solid black",
+          borderRadius: "20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+          color: "#555",
+          margin: "20px auto",
+        }}
+      >
+        MobilePreview
+      </Box>
+      <a href={`/${username}`} target="_blank" rel="noopener noreferrer">
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ marginBottom: 1, borderRadius: 10 }}
+        >
+          Launch site
+        </Button>
+      </a>
     </Box>
   );
 };

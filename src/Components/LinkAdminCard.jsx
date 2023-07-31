@@ -10,6 +10,7 @@ import Switch from "@mui/material/Switch";
 import { useLinkContext } from "../context/LinkContext";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import { Box } from "@mui/material";
 
 const LinkAdminCard = ({ link }) => {
   const {
@@ -59,30 +60,69 @@ const LinkAdminCard = ({ link }) => {
 
   return (
     <>
-      <Card key={link.linkId} sx={{ marginBottom: 2 }}>
+      <Card key={link.linkId} sx={{ margin: 2 }}>
         <CardContent
           sx={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "left",
             justifyContent: "space-between",
+            flexDirection: "column",
+            flexWrap: "wrap",
+            "& .MuiTypography-root": {
+              flexBasis: "50%",
+              marginBottom: 1,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              "&:hover": {
+                whiteSpace: "normal",
+                wordBreak: "break-all",
+                overflowWrap: "break-word",
+              },
+            },
           }}
         >
-          <Typography>{link.title}</Typography>
-          <Typography>{link.url}</Typography>
-          <div>
-            <Switch
-              checked={link.visibility}
-              onChange={() =>
-                handleVisibilityChange(link.linkId, !link.visibility)
-              }
-            />
-            <IconButton onClick={handleEditModalOpen}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={handleDeleteModalOpen}>
-              <DeleteIcon />
-            </IconButton>
-          </div>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              width: "100%", // Allow content to wrap on smaller screens
+            }}
+          >
+            <Box
+              sx={{
+                flex: "1 1 auto", // Allow title and URL to take up the available space
+                minWidth: 0, // Allow title and URL to shrink on smaller screens
+              }}
+            >
+              <Typography variant="h5">{link.title}</Typography>
+              <Typography variant="body2">{link.url}</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                minWidth: "120px", // Set a minimum width for the icons container
+              }}
+            >
+              <Switch
+                checked={link.visibility}
+                onChange={() =>
+                  handleVisibilityChange(link.linkId, !link.visibility)
+                }
+              />
+              <IconButton onClick={handleEditModalOpen}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={handleDeleteModalOpen}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          </Box>
         </CardContent>
       </Card>
 

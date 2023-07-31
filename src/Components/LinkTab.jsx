@@ -14,7 +14,13 @@ const LinkTab = () => {
 
   return (
     <div>
-      <Button onClick={handleAddLink}>Add Link</Button>
+      <Button
+        onClick={handleAddLink}
+        variant="contained"
+        sx={{ margin: 2, borderRadius: 10, width: "50%" }}
+      >
+        + Add Link
+      </Button>
 
       {showForm && <LinkForm onClose={() => setShowForm(false)} />}
 
