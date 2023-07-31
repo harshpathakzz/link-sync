@@ -31,7 +31,25 @@ const AdminPage = () => {
             {activeTab === 1 && <AppearanceTab />}
           </div>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid
+          item
+          xs={12}
+          md={3}
+          sx={{
+            position: "sticky",
+            right: 0,
+            top: 0,
+            height: "100%",
+            zIndex: 1,
+            "@media (max-width: 960px)": {
+              position: "relative",
+              right: "auto",
+              top: "auto",
+              height: "auto",
+              zIndex: "auto",
+            },
+          }}
+        >
           {/* Right Part */}
           <MobilePreview />
         </Grid>
