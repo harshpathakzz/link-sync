@@ -40,7 +40,7 @@ const TitleAndBioForm = () => {
           </Typography>
         </FormControl>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
+      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "2px" }}>
         <FormControl sx={{ margin: "10px" }}>
           <TextField
             id="bio"

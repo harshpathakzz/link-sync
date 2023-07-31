@@ -49,7 +49,7 @@ const AppearanceTab = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        margin: "20px",
+        margin: 2,
         alignItems: "flex-start",
       }}
     >
@@ -57,7 +57,7 @@ const AppearanceTab = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          marginBottom: "20px",
+          marginBottom: 2,
         }}
       >
         {profilePicURL ? (
