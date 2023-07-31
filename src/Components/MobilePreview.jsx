@@ -2,7 +2,6 @@ import { Box, Button } from "@mui/material";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 
 const MobilePreview = () => {
-  const navigate = useNavigate();
   const { username } = useTitleAndBioContext();
 
   return (
@@ -33,7 +32,11 @@ const MobilePreview = () => {
         MobilePreview
       </Box>
       <a href={`/${username}`} target="_blank" rel="noopener noreferrer">
-        <Button variant="contained" color="primary" sx={{ marginBottom: 1 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ marginBottom: 1, borderRadius: 10 }}
+        >
           Launch site
         </Button>
       </a>
