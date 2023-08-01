@@ -9,20 +9,6 @@ const MobilePreview = () => {
   const phoneFrameStyles = {
     width: "280px",
     height: "500px",
-    backgroundImage: "url('path_to_phone_frame_image.png')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    borderRadius: "10px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "20px",
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "#555",
-    margin: "20px auto",
   };
 
   return (
@@ -33,11 +19,7 @@ const MobilePreview = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
-        backgroundImage:
-          "url('https://firebasestorage.googleapis.com/v0/b/link-sync-64286.appspot.com/o/images%2Fpexels-pixabay-36717.jpg?alt=media&token=56b86be4-efbc-407a-a358-97b3008ab8d0')",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
+        border: "1px solid #fff",
       }}
     >
       <Box sx={phoneFrameStyles}>
