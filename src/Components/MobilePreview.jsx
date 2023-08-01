@@ -1,8 +1,10 @@
 import { Box, Button } from "@mui/material";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
+import { useLinkContext } from "../context/LinkContext";
 
 const MobilePreview = () => {
-  const { username } = useTitleAndBioContext();
+  const { username, title, bio, profilePicURL } = useTitleAndBioContext();
+  const { links } = useLinkContext();
 
   return (
     <Box
