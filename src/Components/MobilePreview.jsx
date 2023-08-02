@@ -50,7 +50,13 @@ const MobilePreview = () => {
       border: "1px solid rgba( 255, 255, 255, 0.18 )",
       padding: "10px",
       color: "#fff",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
       "&:hover": {
+        whiteSpace: "normal",
+        wordBreak: "break-all",
+        overflowWrap: "break-word",
         background: "rgba( 14, 8, 8, 0.8)",
       },
     },
@@ -63,16 +69,21 @@ const MobilePreview = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "10vh",
+        marginTop: "7vh",
       }}
     >
       <Box
         sx={{
-          height: "80vh",
-          width: "250px",
+          height: "75vh",
+          width: "230px",
           overflow: "scroll",
           border: "12px solid black",
           borderRadius: "20px",
+          "@media (max-width: 900px)": {
+            height: "60vh",
+            border: "8px solid black",
+            width: "220px",
+          },
         }}
       >
         <Box sx={pageStyles.boxContainer}>

@@ -53,7 +53,13 @@ const pageStyles = {
     border: "1px solid rgba( 255, 255, 255, 0.18 )",
     padding: "10px",
     color: "#fff",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
     "&:hover": {
+      whiteSpace: "normal",
+      wordBreak: "break-all",
+      overflowWrap: "break-word",
       background: "rgba( 14, 8, 8, 0.8)",
     },
   },
