@@ -26,33 +26,38 @@ const AdminPage = () => {
             >
               <Tab label="Links" />
               <Tab label="Appearance" />
+              <Tab label="Analytics" /> {/* Add the new Analytics tab */}
             </Tabs>
             {activeTab === 0 && <LinkTab />}
             {activeTab === 1 && <AppearanceTab />}
+            {activeTab === 2 && <p>Analytics Content</p>}{" "}
+            {/* Placeholder for Analytics content */}
           </div>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={3}
-          sx={{
-            position: "sticky",
-            right: 0,
-            top: 0,
-            height: "100%",
-            zIndex: 1,
-            "@media (max-width: 960px)": {
-              position: "relative",
-              right: "auto",
-              top: "auto",
-              height: "auto",
-              zIndex: "auto",
-            },
-          }}
-        >
-          {/* Right Part */}
-          <MobilePreview />
-        </Grid>
+        {activeTab !== 2 && (
+          <Grid
+            item
+            xs={12}
+            md={3}
+            sx={{
+              position: "sticky",
+              right: 0,
+              top: 0,
+              height: "100%",
+              zIndex: 1,
+              "@media (max-width: 960px)": {
+                position: "relative",
+                right: "auto",
+                top: "auto",
+                height: "auto",
+                zIndex: "auto",
+              },
+            }}
+          >
+            {/* Right Part */}
+            <MobilePreview />
+          </Grid>
+        )}
       </Grid>
     </div>
   );
