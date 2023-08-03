@@ -48,16 +48,22 @@ export const getUserVisitorCount = async (userID, timeFrame) => {
       dayOfWeek = today.getDay();
       daysUntilStartOfWeek = dayOfWeek !== 0 ? dayOfWeek - 1 : 6;
       startDate.setDate(today.getDate() - daysUntilStartOfWeek);
+      startDate.setHours(0, 0, 0, 0);
       endDate = new Date(startDate);
       endDate.setDate(startDate.getDate() + 6);
+      endDate.setHours(23, 59, 59, 999);
       break;
     case "monthly":
       startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      startDate.setHours(0, 0, 0, 0);
       endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      endDate.setHours(23, 59, 59, 999);
       break;
     case "yearly":
       startDate = new Date(today.getFullYear(), 0, 1);
+      startDate.setHours(0, 0, 0, 0);
       endDate = new Date(today.getFullYear(), 11, 31);
+      endDate.setHours(23, 59, 59, 999);
       break;
     default:
       throw new Error("Invalid time frame");
