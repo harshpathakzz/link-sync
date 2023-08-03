@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import AppearanceTab from "../Components/AppearanceTab";
 import LinkTab from "../Components/LinkTab";
 import MobilePreview from "../Components/MobilePreview";
+import AnalyticsTab from "../Components/AnalyticsTab";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +31,7 @@ const AdminPage = () => {
             </Tabs>
             {activeTab === 0 && <LinkTab />}
             {activeTab === 1 && <AppearanceTab />}
-            {activeTab === 2 && <p>Analytics Content</p>}{" "}
+            {activeTab === 2 && <AnalyticsTab />}
             {/* Placeholder for Analytics content */}
           </div>
         </Grid>
