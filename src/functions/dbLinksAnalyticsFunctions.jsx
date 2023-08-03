@@ -75,3 +75,14 @@ export const getLinkVisitorCount = async (linkID, timeFrame) => {
 
   return querySnapshot.size;
 };
+
+export const getAllLinkVisits = async (linkID) => {
+  const analyticsCollectionRef = collection(db, "link-analytics");
+
+  const q = query(analyticsCollectionRef, where("linkID", "==", linkID));
+
+  const querySnapshot = await getDocs(q);
+  console.log("Query result:", querySnapshot.docs.length);
+
+  return querySnapshot.size;
+};
