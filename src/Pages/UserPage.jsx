@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getIdByUsername } from "../functions/dbUsernameFunctions";
 import { getUserTitleAndBio } from "../functions/dbTitleBioFunctions";
 import { getLinksByUserId } from "../functions/dbLinksFunctions";
+import { trackUserVisit } from "../functions/dbUserAnalyticsFunctions";
 import UserProfileAvatar from "../Components/UserProfileAvatar";
 import Button from "@mui/material/Button";
 import { Typography, Box, Container, Stack } from "@mui/material";
@@ -81,6 +82,7 @@ const ProfilePage = () => {
       setBio(bio);
       const links = await getLinksByUserId(id);
       setLinks(links);
+      await trackUserVisit(id);
     };
     fetchUserData();
   }, [username]);
