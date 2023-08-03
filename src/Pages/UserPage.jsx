@@ -4,6 +4,7 @@ import { getIdByUsername } from "../functions/dbUsernameFunctions";
 import { getUserTitleAndBio } from "../functions/dbTitleBioFunctions";
 import { getLinksByUserId } from "../functions/dbLinksFunctions";
 import { trackUserVisit } from "../functions/dbUserAnalyticsFunctions";
+import { trackLinkVisit } from "../functions/dbLinksAnalyticsFunctions";
 import UserProfileAvatar from "../Components/UserProfileAvatar";
 import Button from "@mui/material/Button";
 import { Typography, Box, Container, Stack } from "@mui/material";
@@ -87,6 +88,10 @@ const ProfilePage = () => {
     fetchUserData();
   }, [username]);
 
+  const handleLinkClick = async (linkId) => {
+    await trackLinkVisit(linkId);
+  };
+
   return (
     <Box sx={pageStyles.boxContainer}>
       <Container
@@ -106,12 +111,13 @@ const ProfilePage = () => {
               (link) =>
                 link.visibility && (
                   <Button
-                    key={link.id}
+                    key={link.linkId}
                     variant="contained"
                     color="primary"
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleLinkClick(link.linkId)}
                     sx={pageStyles.button}
                   >
                     {link.title}

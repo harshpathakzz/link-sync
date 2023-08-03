@@ -1,32 +1,49 @@
-import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  Box,
-} from "@mui/material";
+// AnalyticsTab.jsx
+import { useState, useEffect } from "react";
+import { Container, Typography, Box } from "@mui/material";
 import { getUserVisitorCount } from "../functions/dbUserAnalyticsFunctions";
 import { useUserAuth } from "../context/UserAuthContext";
+import { getLinksByUserId } from "../functions/dbLinksFunctions";
+import { getLinkVisitorCount } from "../functions/dbLinksAnalyticsFunctions";
+import UserProfileAnalytics from "./UserProfileAnalytics"; // Create UserProfileAnalytics.jsx
+import LinkAnalyticsTab from "./LinkAnalyticsTab"; // Create LinkAnalyticsTab.jsx
 
 const AnalyticsTab = () => {
   const { user } = useUserAuth();
-  const [analyticsData, setAnalyticsData] = useState([]);
+  const [userAnalytics, setUserAnalytics] = useState([]);
+  const [linkAnalytics, setLinkAnalytics] = useState([]);
 
   useEffect(() => {
     if (user) {
       const fetchAnalyticsData = async () => {
-        const analyticsPromises = ["daily", "weekly", "monthly", "yearly"].map(
-          (timePeriod) =>
-            getUserVisitorCount(user.uid, timePeriod).then((count) => ({
-              timePeriod,
-              count,
-            }))
+        // Fetch user analytics
+        const userAnalyticsPromises = [
+          "daily",
+          "weekly",
+          "monthly",
+          "yearly",
+        ].map((timePeriod) =>
+          getUserVisitorCount(user.uid, timePeriod).then((count) => ({
+            timePeriod,
+            count,
+          }))
         );
 
-        const analyticsResults = await Promise.all(analyticsPromises);
-        setAnalyticsData(analyticsResults);
+        const userAnalyticsResults = await Promise.all(userAnalyticsPromises);
+        setUserAnalytics(userAnalyticsResults);
+
+        // Fetch link analytics
+        const links = await getLinksByUserId(user.uid);
+        const linkAnalyticsPromises = links.map(async (link) => {
+          const count = await getLinkVisitorCount(link.linkId, "daily"); // You can change the time period as needed
+          return {
+            timePeriod: link.title, // Use the link title as the time period for clarity
+            count,
+          };
+        });
+
+        const linkAnalyticsResults = await Promise.all(linkAnalyticsPromises);
+        setLinkAnalytics(linkAnalyticsResults);
       };
 
       fetchAnalyticsData();
@@ -38,23 +55,12 @@ const AnalyticsTab = () => {
       <Typography variant="h4" gutterBottom sx={{ mb: 2 }}>
         Website Analytics
       </Typography>
-      <Grid container spacing={3}>
-        {analyticsData.map((analyticsItem, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card variant="outlined" sx={{ height: "100%", borderRadius: 5 }}>
-              <CardContent>
-                <Typography variant="h6" sx={{ textAlign: "center", mb: 2 }}>
-                  {analyticsItem.timePeriod.charAt(0).toUpperCase() +
-                    analyticsItem.timePeriod.slice(1)}
-                </Typography>
-                <Typography variant="body2" sx={{ textAlign: "center" }}>
-                  Total Visitors: {analyticsItem.count}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      {/* Render User Profile Analytics */}
+      <UserProfileAnalytics userAnalytics={userAnalytics} />
+
+      {/* Render Link Analytics Tabs */}
+      <LinkAnalyticsTab linkAnalytics={linkAnalytics} />
+
       <Box mt={3} textAlign="center">
         <Typography variant="body1">
           Gain insights into your website's traffic over different time periods.
