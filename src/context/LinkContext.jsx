@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useUserAuth } from "./UserAuthContext";
 import {
   createLink,
-  getLinkById,
   deleteLink,
   updateLink,
   getLinksByUserId,
@@ -39,6 +38,7 @@ export const LinkProvider = ({ children }) => {
         ...prevLinks,
         { linkId, title, url, visibility: true },
       ]);
+      return linkId;
     } catch (error) {
       console.error("Error creating link:", error);
     }
@@ -65,6 +65,7 @@ export const LinkProvider = ({ children }) => {
       setLinks((prevLinks) =>
         prevLinks.filter((link) => link.linkId !== linkId)
       );
+      return true;
     } catch (error) {
       console.error("Error deleting link:", error);
     }
