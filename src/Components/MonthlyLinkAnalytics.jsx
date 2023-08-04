@@ -18,7 +18,7 @@ const MonthlyLinkAnalytics = ({ linkId }) => {
     fetchMonthlyClicks();
   }, [linkId]);
 
-  return <Typography>Monthly Clicks: {monthlyClicks}</Typography>;
+  return <Typography>Clicks: {monthlyClicks}</Typography>;
 };
 
 export default MonthlyLinkAnalytics;

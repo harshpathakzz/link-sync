@@ -34,7 +34,7 @@ const UserAnalyticsComponent = () => {
   const cardStyles = {
     borderRadius: "8px",
     transition: "transform 0.3s",
-    boxShadow: "0px 4px 8px rgba(63, 81, 342, 0.8)", // Same color shadow for all cards
+    boxShadow: "0px 4px 8px rgba(63, 81, 342, 0.8)",
     "&:hover": {
       transform: "scale(1.05)",
     },
