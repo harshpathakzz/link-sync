@@ -19,7 +19,7 @@ const DailyLinkAnalytics = ({ linkId }) => {
     fetchDailyClicks();
   }, [linkId]);
 
-  return <Typography>Daily Clicks: {dailyClicks}</Typography>;
+  return <Typography>Clicks: {dailyClicks}</Typography>;
 };
 
 export default DailyLinkAnalytics;
