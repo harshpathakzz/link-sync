@@ -45,10 +45,10 @@ const LinkAdminCard = ({ link }) => {
 
   const handleDelete = async () => {
     try {
-      const success = await deleteLink(link.linkId);
+      const success = await handleDeleteExistingLink(link.linkId);
       if (success) {
         console.log("Link deleted:", link.linkId);
-        handleDeleteExistingLink(link.linkId);
+
         handleDeleteModalClose();
       } else {
         throw new Error("Failed to delete link. Please try again.");

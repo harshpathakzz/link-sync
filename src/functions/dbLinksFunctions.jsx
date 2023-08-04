@@ -50,8 +50,13 @@ export const getLinkById = async (id) => {
 
 // Delete a link
 export const deleteLink = async (id) => {
-  const linkDocRef = doc(db, "links", id);
-  await deleteDoc(linkDocRef);
+  try {
+    const linkDocRef = doc(db, "links", id);
+    await deleteDoc(linkDocRef);
+  } catch (error) {
+    console.error("Error deleting link:", error);
+    throw error;
+  }
 };
 
 // Update a link
