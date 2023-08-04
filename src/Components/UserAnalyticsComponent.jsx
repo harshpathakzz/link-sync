@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
+import { Card, CardContent, Typography, Grid, Box } from "@mui/material";
 import { getUserVisitorCount } from "../functions/dbUserAnalyticsFunctions";
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -31,21 +31,33 @@ const UserAnalyticsComponent = () => {
     fetchUserAnalytics();
   }, [user.uid, timeFrames]);
 
+  const cardStyles = {
+    borderRadius: "8px",
+    transition: "transform 0.3s",
+    boxShadow: "0px 4px 8px rgba(63, 81, 342, 0.8)",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+  };
+
   return (
-    <Grid container spacing={3}>
-      {timeFrames.map((timeFrame, index) => (
-        <Grid item xs={12} sm={6} md={3} key={index}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">
-                {timeFrame.charAt(0).toUpperCase() + timeFrame.slice(1)} Visits
-              </Typography>
-              <Typography>{visits[timeFrame]} visits</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <Box m={2}>
+      <Grid container spacing={3}>
+        {timeFrames.map((timeFrame, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card sx={cardStyles}>
+              <CardContent>
+                <Typography variant="h6">
+                  {timeFrame.charAt(0).toUpperCase() + timeFrame.slice(1)}{" "}
+                  Visits
+                </Typography>
+                <Typography>{visits[timeFrame]} visits</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

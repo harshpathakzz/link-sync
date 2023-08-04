@@ -19,7 +19,7 @@ const WeeklyLinkAnalytics = ({ linkId }) => {
     fetchWeeklyClicks();
   }, [linkId]);
 
-  return <Typography>Weekly Clicks: {weeklyClicks}</Typography>;
+  return <Typography>Clicks: {weeklyClicks}</Typography>;
 };
 
 export default WeeklyLinkAnalytics;

@@ -18,7 +18,7 @@ const YearlyLinkAnalytics = ({ linkId }) => {
     fetchYearlyClicks();
   }, [linkId]);
 
-  return <Typography>Yearly Clicks: {yearlyClicks}</Typography>;
+  return <Typography>Clicks: {yearlyClicks}</Typography>;
 };
 
 export default YearlyLinkAnalytics;
