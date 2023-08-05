@@ -5,7 +5,11 @@ import { useLinkContext } from "../context/LinkContext";
 import LinkAdminCard from "./LinkAdminCard";
 
 const LinkTab = () => {
-  const { links } = useLinkContext();
+  const {
+    state: { links },
+    actions,
+  } = useLinkContext();
+
   const [showForm, setShowForm] = useState(false);
 
   const handleAddLink = () => {
@@ -24,7 +28,6 @@ const LinkTab = () => {
 
       {showForm && <LinkForm onClose={() => setShowForm(false)} />}
 
-      {/* Render the links using LinkAdminCard */}
       {links.map((link) => (
         <LinkAdminCard key={link.linkId} link={link} />
       ))}

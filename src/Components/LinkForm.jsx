@@ -1,17 +1,16 @@
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import Box from "@mui/material/Box";
 import { useLinkContext } from "../context/LinkContext";
 
 const LinkForm = ({ onClose }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
-  const { handleCreateNewLink } = useLinkContext();
+  const { actions } = useLinkContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +20,6 @@ const LinkForm = ({ onClose }) => {
       return;
     }
 
-    // Regular expression to check if the URL is valid
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     if (!url.match(urlRegex)) {
       setError("Please enter a valid URL.");
@@ -29,7 +27,7 @@ const LinkForm = ({ onClose }) => {
     }
 
     try {
-      const linkId = await handleCreateNewLink(title, url);
+      const linkId = await actions.handleCreateNewLink(title, url);
       console.log("New link added with LinkId:", linkId);
       onClose();
     } catch (error) {

@@ -11,7 +11,7 @@ import { useLinkContext } from "../context/LinkContext";
 
 const MobilePreview = () => {
   const { username, title, bio, profilePicURL } = useTitleAndBioContext();
-  const { links } = useLinkContext();
+  const { state: linkState } = useLinkContext();
 
   const pageStyles = {
     glassMorphism: true,
@@ -106,7 +106,7 @@ const MobilePreview = () => {
             </Typography>
             <Box mt={4} textAlign="center">
               <Stack spacing={2} sx={{ alignItems: "center" }}>
-                {links.map(
+                {linkState.links.map(
                   (link) =>
                     link.visibility && (
                       <Button
