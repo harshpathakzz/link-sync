@@ -6,18 +6,13 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Switch from "@mui/material/Switch";
-
 import { useLinkContext } from "../context/LinkContext";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import { Box } from "@mui/material";
 
 const LinkAdminCard = ({ link }) => {
-  const {
-    handleVisibilityChange,
-    handleUpdateExistingLink,
-    handleDeleteExistingLink,
-  } = useLinkContext();
+  const { actions } = useLinkContext();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -39,16 +34,15 @@ const LinkAdminCard = ({ link }) => {
   };
 
   const handleSaveChanges = (linkId, editedTitle, editedUrl) => {
-    handleUpdateExistingLink(linkId, editedTitle, editedUrl);
+    actions.handleUpdateExistingLink(linkId, editedTitle, editedUrl);
     handleEditModalClose();
   };
 
   const handleDelete = async () => {
     try {
-      const success = await handleDeleteExistingLink(link.linkId);
+      const success = await actions.handleDeleteExistingLink(link.linkId);
       if (success) {
         console.log("Link deleted:", link.linkId);
-
         handleDeleteModalClose();
       } else {
         throw new Error("Failed to delete link. Please try again.");
@@ -89,13 +83,13 @@ const LinkAdminCard = ({ link }) => {
               alignItems: "center",
               flexDirection: "row",
               flexWrap: "wrap",
-              width: "100%", // Allow content to wrap on smaller screens
+              width: "100%",
             }}
           >
             <Box
               sx={{
-                flex: "1 1 auto", // Allow title and URL to take up the available space
-                minWidth: 0, // Allow title and URL to shrink on smaller screens
+                flex: "1 1 auto",
+                minWidth: 0,
               }}
             >
               <Typography variant="h5">{link.title}</Typography>
@@ -106,13 +100,13 @@ const LinkAdminCard = ({ link }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                minWidth: "120px", // Set a minimum width for the icons container
+                minWidth: "120px",
               }}
             >
               <Switch
                 checked={link.visibility}
                 onChange={() =>
-                  handleVisibilityChange(link.linkId, !link.visibility)
+                  actions.handleVisibilityChange(link.linkId, !link.visibility)
                 }
               />
               <IconButton onClick={handleEditModalOpen}>
