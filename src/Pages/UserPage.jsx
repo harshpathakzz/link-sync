@@ -22,21 +22,13 @@ const pageStyles = {
     backgroundPosition: "center center",
   },
   container: (glassMorphism) => ({
-    maxWidth: "md",
+    maxWidth: "100vw",
     textAlign: "center",
     height: "100vh",
     width: "100%",
     color: "#fff",
     padding: "20px",
     overflow: "auto",
-    scrollbarWidth: "none", // Remove the scrollbar for Firefox
-    "&::-webkit-scrollbar": {
-      width: "0.4em", // Adjust the width as needed
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "transparent",
-    },
-    msOverflowStyle: "none", // Remove the scrollbar for IE and Edge
     // Set the glass morphism styles conditionally
     boxShadow: glassMorphism
       ? "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )"
@@ -63,6 +55,9 @@ const pageStyles = {
       wordBreak: "break-all",
       overflowWrap: "break-word",
       background: "rgba( 14, 8, 8, 0.8)",
+    },
+    "@media (min-width: 700px)": {
+      width: "60%",
     },
   },
 };

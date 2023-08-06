@@ -26,7 +26,7 @@ const MobilePreview = () => {
       backgroundPosition: "center center",
     },
     container: (glassMorphism) => ({
-      maxWidth: "md",
+      maxWidth: "100vw",
       textAlign: "center",
       height: "100vh",
       width: "100%",
