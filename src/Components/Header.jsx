@@ -9,12 +9,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const open = Boolean(anchorEl);
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -23,7 +27,16 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const navigate = useNavigate();
+
   const handleLogoutClick = async () => {
     try {
       await handleLogout();
@@ -32,6 +45,7 @@ export default function Header() {
       console.log(error);
     }
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -42,10 +56,12 @@ export default function Header() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+          ></IconButton>
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ flexGrow: 1, fontWeight: "700" }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             LinkSync
           </Typography>
           <IconButton
@@ -74,6 +90,7 @@ export default function Header() {
             open={open}
             onClose={handleMenuClose}
           >
+            <MenuItem onClick={openModal}>Custom Domain</MenuItem>
             <MenuItem onClick={handleLogoutClick}>
               <LogoutIcon sx={{ mr: 1 }} />
               Logout
@@ -81,6 +98,24 @@ export default function Header() {
           </Menu>
         </Toolbar>
       </AppBar>
+
+      <Modal open={isModalOpen} onClose={closeModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Typography variant="h5" gutterBottom>
+            Work In Progress
+          </Typography>
+          <Button variant="contained" onClick={closeModal}>
+            Close
+          </Button>
+        </Box>
+      </Modal>
     </Box>
   );
 }
