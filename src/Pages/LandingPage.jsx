@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
 import { useUserAuth } from "../context/UserAuthContext";
 import { useNavigate } from "react-router-dom";
-
+// import CustomDomainSVG from "../assets/custom-domain.svg";
 const LandingPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useUserAuth();
@@ -164,6 +164,7 @@ const LandingPage = () => {
         <Grid item xs={12} sm={6}>
           <Paper elevation={3} style={emptyCardStyle}>
             {/* Add any icon or image placeholder here */}
+            <img src="../assets/analytics.svg" alt="" />
           </Paper>
         </Grid>
 
