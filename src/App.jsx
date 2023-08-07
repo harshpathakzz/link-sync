@@ -8,6 +8,7 @@ import { useUserAuth } from "./context/UserAuthContext";
 import Protected from "./Components/Protected";
 import RequestLoginPage from "./Pages/RequestLoginPage";
 import { Analytics } from "@vercel/analytics/react";
+import Footer from "./Components/Footer";
 function App() {
   const { isLoggedIn } = useUserAuth();
   return (
@@ -35,6 +36,7 @@ function App() {
 
         <Route path="*" element={<h1> PAGE NOT FOUND</h1>} />
       </Routes>
+      <Footer />
     </>
   );
 }
