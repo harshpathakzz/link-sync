@@ -1,3 +1,4 @@
+import React from "react";
 import { Typography, Box } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -9,11 +10,14 @@ const Footer = () => {
   return (
     <Box
       sx={{
+        position: "relative",
+        bottom: 0,
+        width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: 2,
-        marginTop: 2,
+        marginTop: "auto",
       }}
     >
       <Typography
