@@ -18,7 +18,7 @@ const LandingPage = () => {
   }, [isLoggedIn, navigate]);
 
   const cardStyle = {
-    padding: "10px",
+    padding: "20px",
     borderRadius: "10px",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
     backgroundImage:
