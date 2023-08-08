@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getIdByUsername } from "../functions/dbUsernameFunctions";
-import { getUserTitleAndBio } from "../functions/dbTitleBioFunctions";
 import { getLinksByUserId } from "../functions/dbLinksFunctions";
 import { trackUserVisit } from "../functions/dbUserAnalyticsFunctions";
 import { trackLinkVisit } from "../functions/dbLinksAnalyticsFunctions";
+import { getDataByUsername } from "../functions/dbFunctions";
 import UserProfileAvatar from "../Components/UserProfileAvatar";
 import Button from "@mui/material/Button";
 import { Typography, Box, Container, Stack } from "@mui/material";
@@ -64,21 +63,23 @@ const pageStyles = {
 
 const ProfilePage = () => {
   const { username } = useParams();
-  const [userId, setUserId] = useState(null);
   const [title, setTitle] = useState("");
   const [bio, setBio] = useState("");
   const [links, setLinks] = useState([]);
+  const [profilePicUrl, setProfilePicUrl] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const id = await getIdByUsername(username);
-      setUserId(id);
-      const { title, bio } = await getUserTitleAndBio(id);
-      setTitle(title);
-      setBio(bio);
-      const links = await getLinksByUserId(id);
-      setLinks(links);
-      await trackUserVisit(id);
+      const userData = await getDataByUsername(username);
+      if (userData) {
+        const { title, bio, profilePicUrl, id } = userData;
+        setProfilePicUrl(profilePicUrl);
+        setTitle(title);
+        setBio(bio);
+        const links = await getLinksByUserId(id);
+        setLinks(links);
+        await trackUserVisit(id);
+      }
     };
     fetchUserData();
   }, [username]);
@@ -93,7 +94,7 @@ const ProfilePage = () => {
         maxWidth="md"
         style={pageStyles.container(pageStyles.glassMorphism)} // Apply the glassMorphism styles here
       >
-        <UserProfileAvatar userId={userId} />
+        <UserProfileAvatar profilePicUrl={profilePicUrl} />
         <Typography variant="h4" gutterBottom>
           {title}
         </Typography>
