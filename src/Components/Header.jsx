@@ -12,10 +12,12 @@ import Toolbar from "@mui/material/Toolbar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import { useTitleAndBioContext } from "../context/TitleAndBioContext";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { profilePicURL } = useTitleAndBioContext();
 
   const open = Boolean(anchorEl);
 
@@ -74,7 +76,7 @@ export default function Header() {
             onClick={handleMenuOpen}
             sx={{ ml: 2 }}
           >
-            <Avatar />
+            <Avatar alt="User Profile Picture" src={profilePicURL} />
           </IconButton>
           <Menu
             id="menu-appbar"
