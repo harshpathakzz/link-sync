@@ -78,7 +78,13 @@ const ProfilePage = () => {
         setBio(bio);
         const links = await getLinksByUserId(id);
         setLinks(links);
-        await trackUserVisit(id);
+        // Check if user visit is already tracked in the session
+        const isUserVisited = sessionStorage.getItem("userVisited");
+        if (!isUserVisited) {
+          await trackUserVisit(id);
+          // Mark user visit as tracked in the session
+          sessionStorage.setItem("userVisited", "true");
+        }
       }
     };
     fetchUserData();
