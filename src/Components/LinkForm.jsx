@@ -5,33 +5,35 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import Box from "@mui/material/Box";
 import { useLinkContext } from "../context/LinkContext";
+import { toast } from "sonner"; 
 
 const LinkForm = ({ onClose }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [error, setError] = useState("");
   const { actions } = useLinkContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title || !url) {
-      setError("Please fill in both the title and URL fields.");
+      toast.error("Please fill in both the title and URL fields.");
       return;
     }
 
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     if (!url.match(urlRegex)) {
-      setError("Please enter a valid URL.");
+      toast.error("Please enter a valid URL.");
       return;
     }
 
     try {
       const linkId = await actions.handleCreateNewLink(title, url);
       console.log("New link added with LinkId:", linkId);
+      toast.success("New link added successfully!"); 
       onClose();
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Failed to add new link."); 
     }
   };
 
@@ -72,8 +74,6 @@ const LinkForm = ({ onClose }) => {
           Cancel
         </Button>
       </Box>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 };

@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { toast } from "sonner"; // Import Sonner Toast
 
 const AppearanceTab = () => {
   const {
@@ -31,6 +32,7 @@ const AppearanceTab = () => {
     try {
       await handleUpdateUsername(username);
       console.log("Username updated:", username);
+      toast.success("Username updated successfully!"); // Success toast
     } catch (error) {
       console.error("Error updating username:", error);
       let errorMessage = "Failed to update username. Please try again.";
@@ -40,7 +42,8 @@ const AppearanceTab = () => {
           "Username is already taken. Please choose a different username.";
       }
 
-      setError(errorMessage);
+      toast.error(errorMessage); // Error toast
+      setError(errorMessage); // Optional: Keep setting error in state if needed
     }
   };
 
@@ -123,17 +126,6 @@ const AppearanceTab = () => {
           Update
         </Button>
       </Box>
-      {error && (
-        <Typography
-          color="error"
-          variant="body1"
-          sx={{
-            marginTop: "15px",
-          }}
-        >
-          {error}
-        </Typography>
-      )}
       <Box sx={{ marginTop: "30px" }}>
         <TitleAndBioForm />
       </Box>
