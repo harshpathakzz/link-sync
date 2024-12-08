@@ -4,13 +4,20 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useTitleAndBioContext } from "../context/TitleAndBioContext";
+import { toast } from "sonner"; 
 
 const TitleAndBioForm = () => {
   const { title, setTitle, bio, setBio, handleUpdateTitleAndBio } =
     useTitleAndBioContext();
 
-  const handleUpdateClick = () => {
-    handleUpdateTitleAndBio(title, bio);
+  const handleUpdateClick = async () => {
+    try {
+      await handleUpdateTitleAndBio(title, bio); 
+      toast.success("Title and Bio updated successfully!"); 
+    } catch (error) {
+      console.error("Error updating title and bio:", error);
+      toast.error("Failed to update title and bio. Please try again."); 
+    }
   };
 
   return (
