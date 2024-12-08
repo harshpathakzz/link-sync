@@ -49,24 +49,33 @@ const AppearanceTab = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        margin: 2,
-        alignItems: "flex-start",
+        padding: "20px",
+        maxWidth: { xs: "100vw", sm: "70vw" },
+        margin: "0", 
       }}
     >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          marginBottom: 2,
+          marginBottom: "20px",
+          gap: "20px", 
+          flexWrap: "wrap", 
         }}
       >
         <Avatar
-          sx={{ width: "100px", height: "100px", margin: "10px" }}
+          sx={{
+            width: "100px",
+            height: "100px",
+          }}
           src={profilePicURL || ""}
           alt="Avatar"
         />
         <Button
-          sx={{ textTransform: "none", height: "30px", margin: "10px" }}
+          sx={{
+            textTransform: "none",
+            height: "40px", 
+          }}
           variant="contained"
           color="primary"
           component="label"
@@ -85,26 +94,27 @@ const AppearanceTab = () => {
       <Box
         sx={{
           display: "flex",
-          alignItems: "flex-start",
-          marginBottom: "20px",
           flexDirection: "column",
+          gap: "15px", 
+          width: "100%", 
         }}
       >
-        <FormControl sx={{ margin: "10px", width: "100%" }}>
+        <FormControl>
           <TextField
             id="username"
             label="Username"
             value={username}
             onChange={handleUsernameChange}
+            sx={{
+              width: "100%", 
+            }}
           />
         </FormControl>
         <Button
           sx={{
             textTransform: "none",
-            height: "30px",
-            marginLeft: "10px",
-            marginTop: "5px",
             width: "100%",
+            padding: "10px", 
           }}
           variant="contained"
           color="primary"
@@ -114,11 +124,19 @@ const AppearanceTab = () => {
         </Button>
       </Box>
       {error && (
-        <Typography color="error" variant="body1" sx={{ marginBottom: "10px" }}>
+        <Typography
+          color="error"
+          variant="body1"
+          sx={{
+            marginTop: "15px",
+          }}
+        >
           {error}
         </Typography>
       )}
-      <TitleAndBioForm />
+      <Box sx={{ marginTop: "30px" }}>
+        <TitleAndBioForm />
+      </Box>
     </Box>
   );
 };
