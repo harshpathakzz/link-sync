@@ -18,7 +18,7 @@ const LifetimeLinkAnalytics = ({ linkId }) => {
     fetchLifetimeClicks();
   }, [linkId]);
 
-  return <Typography>Lifetime Clicks: {lifetimeClicks}</Typography>;
+  return <Typography>Clicks: {lifetimeClicks}</Typography>;
 };
 
 export default LifetimeLinkAnalytics;
