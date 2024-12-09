@@ -7,26 +7,33 @@ const Footer = () => {
     window.open("https://github.com/harshpathakzz", "_blank");
   };
 
+  const footerStyle = {
+    position: "relative",
+    bottom: 0,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "16px",
+    backgroundColor: "transparent",
+  };
+
+  const textStyle = {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  const iconStyle = {
+    marginLeft: "8px",
+    fontSize: "20px",
+  };
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        bottom: 0,
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 2,
-        marginTop: "auto",
-      }}
-    >
-      <Typography
-        variant="body2"
-        onClick={handleGitHubClick}
-        style={{ cursor: "pointer" }}
-      >
+    <Box sx={footerStyle}>
+      <Typography variant="body2" onClick={handleGitHubClick} style={textStyle}>
         Made with ❤️ by Harsh Pathak
-        <GitHubIcon sx={{ marginLeft: 1, fontSize: 20 }} />
+        <GitHubIcon sx={iconStyle} />
       </Typography>
     </Box>
   );
